@@ -77,6 +77,11 @@ class User
      */
     private $bdCount;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $role = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +227,18 @@ class User
     public function setBdCount(int $bdCount): self
     {
         $this->bdCount = $bdCount;
+
+        return $this;
+    }
+
+    public function getRole(): ?array
+    {
+        return $this->role;
+    }
+
+    public function setRole(array $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

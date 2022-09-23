@@ -22,7 +22,7 @@
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 						<ul class="navbar-nav align-items-end">
 							<li class="nav-item">
-								<a href="#" class="nav-link custom-font">Sign In</li>
+								<a href="#" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#SignInModal">Sign In</li>
 							</li>
 							<li class="nav-item">
 								<a href="#" class="nav-link custom-font">Log In</a>
@@ -33,10 +33,12 @@
 			</div>
 		</header>
 
+		{% include "partials/modals.html.twig" %}
+
 		<div class="container">
 			<div class="row my-5 d-block">
-				<div class="col-5">
-					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+				<div class="col-6">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
 								<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
@@ -56,8 +58,8 @@
 			</div>
 
 			<div class="row my-5 d-flex justify-content-end">
-				<div class="col-5">
-					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+				<div class="col-6">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
 								<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
