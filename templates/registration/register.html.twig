@@ -1,28 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
-{% endblock %}
 
 {% block body %}
 
 	<section class="container">
 		<div class="row">
-			<h1>Register</h1>
 			<div class="col-3 my-3">
 
+				{% if registrationForm is defined and registrationForm %}
+					{{ form_start(registrationForm) }}
 
-				{{ form_start(registrationForm) }}
 
-				{{ form_row(registrationForm.pseudo) }}
-				{{ form_row(registrationForm.email) }}
-				{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-				{{ form_row(registrationForm.agreeTerms) }}
+					{{ form_row(registrationForm.pseudo) }}
+					{{ form_row(registrationForm.email) }}
+					{{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+					{{ form_row(registrationForm.agreeTerms) }}
 
-				<button type="submit" class="btn my-2" style="background-color:#bdcf3b">Register</button>
-				{{ form_end(registrationForm) }}
 
+					<button type="submit" class="btn my-2" style="background-color:#bdcf3b">Ok</button>
+					{{ form_end(registrationForm) }}
+				{% endif %}
 			</div>
 		</div>
 	</section>

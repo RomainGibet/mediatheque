@@ -22,11 +22,13 @@
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 						<ul class="navbar-nav align-items-end">
 							<li class="nav-item">
-								<a href="#" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a>
+								<a href="{{ path('app_register')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a>
+								{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#SignUpModal #}
 							</li>
 
 							<li class="nav-item">
-								<a href="#" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#LogInModal">Log In</a>
+								<a href="{{ path('app_login')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#LogInModal">Log In</a>
+								{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#LogInModal" #}
 							</li>
 						</ul>
 					</div>
