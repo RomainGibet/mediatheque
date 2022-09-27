@@ -8,7 +8,7 @@
 			<div class="col-3 my-3">
 
 				{% if registrationForm is defined and registrationForm %}
-					{{ form_start(registrationForm) }}
+					{{ form_start(registrationForm, {'action': path('app_register'), 'method': 'POST'}) }}
 
 
 					{{ form_row(registrationForm.pseudo) }}

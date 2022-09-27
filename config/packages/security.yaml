@@ -18,10 +18,21 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppAuthenticator
+                # Set as entry point the default authenticator of the application (LoginFormAuthenticator) to fix the issue
+            entry_point: App\Security\AppAuthenticator
+                # In this example, we have 3 authenticators, one of our sf application
+                # and 2 social authenticators, therefore we use LoginFormAuthenticator as the entry point
+                authenticators:
+                        - App\Security\AppAuthenticator
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                failure_path: app_main
             logout:
                 path: app_logout
                 # where to redirect after logout
                 target: app_main
+            
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
