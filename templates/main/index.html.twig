@@ -10,7 +10,7 @@
 			<div class="header">
 
 
-				<nav class="navbar navbar-expand-sm">
+				<nav class="navbar navbar-expand-sm align-items-end">
 					<a class="navbar-brand logo" href="#">
 						<img src="../public/images/logo.png">
 					</a>
@@ -19,70 +19,129 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-						<ul class="navbar-nav align-items-end">
-							<li class="nav-item">
-								<a href="{{ path('app_register')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a>
-								{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#SignUpModal #}
-							</li>
+					{% if app.user is null %}
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+							<ul class="ul-nav navbar-nav align-items-end">
 
-							<li class="nav-item">
-								<a href="{{ path('app_login')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#LogInModal">Log In</a>
-								{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#LogInModal" #}
-							</li>
-						</ul>
+								<li class="nav-item">
+									<a href="{{ path('app_register')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a>
+									{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#SignUpModal #}
+								</li>
+								<li class="nav-item">
+									<a href="{{ path('app_login')}}" class="nav-link custom-font" data-bs-toggle="modal" data-bs-target="#LogInModal">Log In</a>
+									{# a mettre dans les attributs ci-dessus quand modale data-bs-toggle="modal" data-bs-target="#LogInModal" #}
+								</li>
+							{% else %}
+
+								<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+									<ul class="navbar-nav d-flex">		
+
+
+									<div class="nav-icon-box d-block align-self-end">
+										<li class="nav-item mx-auto collection-picto" >
+
+
+											<img src="../public/images/collection-icon.png">
+
+
+										</li>
+
+										<li class="nav-item">
+											<a href="#">
+												My Collection
+											</a>
+											</li>
+										</div>
+										
+										<div class="nav-icon-box d-block align-self-end" >
+										<li class="nav-item pp-picto mx-auto">
+
+
+											<img src="../public/images/pp.png">
+
+
+										</li>
+										<li class="nav-item">
+										<a href="#">
+												Welcome
+											{{app.user.pseudo}}
+											</a>
+											
+										</li>
+										</div>
+
+										<div class="nav-icon-box d-block align-self-end">
+										<li class="nav-item mx-auto logout-picto">
+
+
+											<img src="../public/images/power-off.png">
+
+
+										</li>
+
+										<li class="nav-item">
+											<a href="{{ path('app_logout')}}">
+												Logout
+											</a>
+											</li>
+										</div>
+
+									{% endif %}
+
+
+								</ul>
+							</div>
+						</nav>
 					</div>
-				</nav>
-			</div>
-		</header>
+				</header>
 
-		{% include "partials/modals_login.html.twig" %}
+				{% include "partials/modals_login.html.twig" %}
 
 
-		<div class="container">
-			<div class="row my-5 d-block">
-				<div class="col-6">
-					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
+				<div class="container">
+					<div class="row my-5 d-block">
+						<div class="col-6">
+							<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" src="../public/images/pic2.jpg" alt="Second slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" src="../public/images/pic3.jpg" alt="Third slide">
+									</div>
+								</div>
+
 							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" src="../public/images/pic2.jpg" alt="Second slide">
+
+						</div>
+
+					</div>
+
+					<div class="row my-5 d-flex justify-content-end">
+						<div class="col-6">
+							<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" src="../public/images/pic2.jpg" alt="Second slide">
+									</div>
+									<div class="carousel-item">
+										<img class="d-block w-100" src="../public/images/pic3.jpg" alt="Third slide">
+									</div>
+								</div>
+
 							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" src="../public/images/pic3.jpg" alt="Third slide">
-							</div>
+
 						</div>
 
 					</div>
 
 				</div>
 
-			</div>
-
-			<div class="row my-5 d-flex justify-content-end">
-				<div class="col-6">
-					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block w-100" src="../public/images/pic1.jpg" alt="First slide">
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" src="../public/images/pic2.jpg" alt="Second slide">
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" src="../public/images/pic3.jpg" alt="Third slide">
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</body>
-{% endblock %}
+			</body>
+		{% endblock %}

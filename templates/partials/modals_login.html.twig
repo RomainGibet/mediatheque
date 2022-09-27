@@ -29,6 +29,8 @@
 			<div class="modal-body">
 
 				{# {% include "registration/register.html.twig" %} #}
+
+        {# Possibilité de faire un render directement dans le fichier twig, afin d'appeler le formulaire d'inscription#}
         {{ render(controller('App\\Controller\\RegistrationController::register')) }}
 
 
