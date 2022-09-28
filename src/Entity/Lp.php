@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LpRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +30,7 @@ class Lp
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $cat_number;
 
@@ -38,7 +40,7 @@ class Lp
     private $label;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $year;
 
@@ -51,6 +53,16 @@ class Lp
      * @ORM\Column(type="string", length=255)
      */
     private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="lp")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,12 +117,12 @@ class Lp
         return $this;
     }
 
-    public function getYear(): ?\DateTimeInterface
+    public function getYear(): ?string
     {
         return $this->year;
     }
 
-    public function setYear(\DateTimeInterface $year): self
+    public function setYear(string $year): self
     {
         $this->year = $year;
 
@@ -137,6 +149,33 @@ class Lp
     public function setGenre(string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addLp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeLp($this);
+        }
 
         return $this;
     }

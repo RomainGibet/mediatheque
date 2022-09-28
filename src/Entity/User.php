@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -84,10 +86,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="users")
+     */
+    private $book;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Bd::class, inversedBy="users")
+     */
+    private $bd;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Comic::class, inversedBy="users")
+     */
+    private $comic;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Manga::class, inversedBy="users")
+     */
+    private $manga;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Cd::class, inversedBy="users")
+     */
+    private $cd;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Lp::class, inversedBy="users")
+     */
+    private $lp;
+
     public function __construct()
     {
 
         $this->createdAt = new \DateTimeImmutable();
+        $this->book = new ArrayCollection();
+        $this->Bd = new ArrayCollection();
+        $this->Comic = new ArrayCollection();
+        $this->Manga = new ArrayCollection();
+        $this->cd = new ArrayCollection();
+        $this->lp = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -284,6 +322,150 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $CreatedAt): self
     {
         $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Book>
+     */
+    public function getBook(): Collection
+    {
+        return $this->book;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->book->contains($book)) {
+            $this->book[] = $book;
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        $this->book->removeElement($book);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Bd>
+     */
+    public function getBd(): Collection
+    {
+        return $this->bd;
+    }
+
+    public function addBd(Bd $bd): self
+    {
+        if (!$this->bd->contains($bd)) {
+            $this->bd[] = $bd;
+        }
+
+        return $this;
+    }
+
+    public function removeBd(Bd $bd): self
+    {
+        $this->bd->removeElement($bd);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comic>
+     */
+    public function getComic(): Collection
+    {
+    return $this->comic;
+}
+
+    public function addComic(Comic $comic): self
+    {
+        if (!$this->comic->contains($comic)) {
+            $this->comic[] = $comic;
+        }
+
+        return $this;
+    }
+
+    public function removeComic(Comic $comic): self
+    {
+        $this->comic->removeElement($comic);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Manga>
+     */
+    public function getManga(): Collection
+    {
+    return $this->manga;
+}
+
+    public function addManga(Manga $manga): self
+    {
+        if (!$this->manga->contains($manga)) {
+            $this->manga[] = $manga;
+        }
+
+        return $this;
+    }
+
+    public function removeManga(Manga $manga): self
+    {
+        $this->manga->removeElement($manga);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cd>
+     */
+    public function getCd(): Collection
+    {
+        return $this->cd;
+    }
+
+    public function addCd(Cd $cd): self
+    {
+        if (!$this->cd->contains($cd)) {
+            $this->cd[] = $cd;
+        }
+
+        return $this;
+    }
+
+    public function removeCd(Cd $cd): self
+    {
+        $this->cd->removeElement($cd);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lp>
+     */
+    public function getLp(): Collection
+    {
+        return $this->lp;
+    }
+
+    public function addLp(Lp $lp): self
+    {
+        if (!$this->lp->contains($lp)) {
+            $this->lp[] = $lp;
+        }
+
+        return $this;
+    }
+
+    public function removeLp(Lp $lp): self
+    {
+        $this->lp->removeElement($lp);
 
         return $this;
     }

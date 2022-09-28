@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ComicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +30,7 @@ class Comic
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $isbn;
 
@@ -38,7 +40,7 @@ class Comic
     private $editor;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $year;
 
@@ -51,6 +53,16 @@ class Comic
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Comic")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,12 +93,12 @@ class Comic
         return $this;
     }
 
-    public function getIsbn(): ?int
+    public function getIsbn(): ?string
     {
         return $this->isbn;
     }
 
-    public function setIsbn(int $isbn): self
+    public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
 
@@ -105,12 +117,12 @@ class Comic
         return $this;
     }
 
-    public function getYear(): ?\DateTimeInterface
+    public function get(): ?string
     {
         return $this->year;
     }
 
-    public function setYear(\DateTimeInterface $year): self
+    public function setYear(string $year): self
     {
         $this->year = $year;
 
@@ -137,6 +149,33 @@ class Comic
     public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addComic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeComic($this);
+        }
 
         return $this;
     }

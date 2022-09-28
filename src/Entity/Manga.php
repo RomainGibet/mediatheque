@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MangaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +30,7 @@ class Manga
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $isbn;
 
@@ -38,7 +40,7 @@ class Manga
     private $editor;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $year;
 
@@ -51,6 +53,16 @@ class Manga
      * @ORM\Column(type="string", length=255)
      */
     private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Manga")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,12 +93,12 @@ class Manga
         return $this;
     }
 
-    public function getIsbn(): ?int
+    public function gstring(): ?string
     {
         return $this->isbn;
     }
 
-    public function setIsbn(int $isbn): self
+    public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
 
@@ -105,12 +117,12 @@ class Manga
         return $this;
     }
 
-    public function getYear(): ?\DateTimeInterface
+    public function getYear(): ?string
     {
         return $this->year;
     }
 
-    public function setYear(\DateTimeInterface $year): self
+    public function setYear(string $year): self
     {
         $this->year = $year;
 
@@ -137,6 +149,33 @@ class Manga
     public function setGenre(string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addManga($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeManga($this);
+        }
 
         return $this;
     }

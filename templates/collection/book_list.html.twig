@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% include "partials/header.html.twig" %}
+
+	{% include "partials/dropdown_btn.html.twig" %}
+
+
+	<section class="container-custom--cat text-center">
+		<div class="row">
+			<div class="col-md-1 custom-cell">
+				Photo de couverture
+			</div>
+			<div class="col-md-1 custom-cell">
+				Author
+			</div>
+			<div class="col-md-1 custom-cell">
+				Title
+			</div>
+			<div class="col-md-1 custom-cell">
+				ISBN
+			</div>
+			<div class="col-md-1 custom-cell">
+				Editor
+			</div>
+			<div class="col-md-1 custom-cell">
+				Year
+			</div>
+			<div class="col-md-1 custom-cell">
+				Country
+			</div>
+			<div class="col-md-1 custom-cell">
+				Genre
+			</div>
+
+		</div>
+	</section>
+
+
+	<section class="container-custom--item">
+
+		{% for book in bookList %}
+			<div class="row">
+				<div class="col-md-1 custom-cell"></div>
+				<div class="col-md-1 custom-cell">
+					{{book.author}}
+				</div>
+				<div class="col-md-1 custom-cell">{{book.title}}</div>
+				<div class="col-md-1 custom-cell">{{book.isbn}}</div>
+				<div class="col-md-1 custom-cell">{{book.editor}}</div>
+				<div class="col-md-1 custom-cell">{{book.year}}</div>
+				<div class="col-md-1 custom-cell">{{book.country}}</div>
+				<div class="col-md-1 custom-cell"></div>
+
+
+			</div>
+		{% endfor %}
+	</section>
+
+{% endblock %}

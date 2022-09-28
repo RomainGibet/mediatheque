@@ -26,12 +26,17 @@ body {
 
     display:flex;
     justify-content: space-around;
-    align-items: end;
-    padding-top: 2em;
+    align-items: center;
+    border-bottom: #800 solid 2px;
     width: 90%;
+    height:20vh;
     margin: auto;
     
 }
+
+/* -----------------------------------------N A V-------------------------------------------------- */
+/* -----------------------------------------N A V-------------------------------------------------- */
+
 
 .ul-nav {
 
@@ -93,10 +98,10 @@ img {
 
 a {
     text-decoration: none;
-    color: #a00;
+    color: #800;
   }
   a:visited {
-    color: #844;
+    color: var(--logo-and-font);
   }
   a:hover, a:focus, a:active {
     text-decoration: none;
@@ -104,3 +109,40 @@ a {
     background: #800;
   }
 
+  /* ----------------------------------------P A R T I A L S-------------------------------------------------- */
+/* ------------------------------------------P A R T I A L S-------------------------------------------------- */
+
+
+.dropdown_custom {
+
+
+    
+}
+
+
+/* -----------------------------------------P A G E  C O L L E C T I O N-------------------------------------------------- */
+/* -----------------------------------------P A G E  C O L L E C T I O N-------------------------------------------------- */
+
+
+.container-custom--cat {
+
+    width: 90%;
+    margin:auto;
+    margin-bottom: 2em;
+}
+
+.container-custom--item {
+    width: 90%;
+    margin:auto;
+
+    
+}
+
+
+
+.custom-cell {
+
+    width: 12.499999995%;
+    border-right: solid 1px var(--logo-and-font);
+    margin-bottom: .7em;
+}
