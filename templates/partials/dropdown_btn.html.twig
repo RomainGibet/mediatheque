@@ -1,5 +1,6 @@
-<div class="dropdown-custom">
-		<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="buttons">
+	<div class="dropdown-custom">
+		<button class="btn btn-secondary dropdown-toggle" style="background-color:var(--logo-and-font); margin-right:.7em;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 			Choose a type of media
 		</button>
 		<ul class="dropdown-menu">
@@ -7,19 +8,43 @@
 				<a class="dropdown-item" href="{{path('app_book_list')}}">Book</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="#">Comic</a>
+				<a class="dropdown-item" href="{{path('app_comic_list')}}">Comic</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="#">BD</a>
+				<a class="dropdown-item" href="{{path('app_bd_list')}}">BD</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="#">Manga</a>
+				<a class="dropdown-item" href="{{path('app_manga_list')}}">Manga</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="#">CD</a>
+				<a class="dropdown-item" href="{{path('app_cd_list')}}">CD</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="#">LP</a>
+				<a class="dropdown-item" href="{{path('app_lp_list')}}">LP</a>
 			</li>
 		</ul>
 	</div>
+	<div class="container-add">
+		<div class="add-button">
+			<button class="btn btn-secondary" style="background-color:var(--logo-and-font)" type="button" aria-expanded="false"><img id="add-picto" src="../public/images/ajouter.png">
+				{% set current_path = app.request.get('_route') %}
+
+				 	{% if current_path == 'app_book_list' %} 
+					 Add a new book 
+					 {% elseif current_path == 'app_comic_list'%}
+					 Add a new comic
+					 {% elseif current_path == 'app_bd_list'%}
+					 Add a new BD
+					 {% elseif current_path == 'app_manga_list'%}
+					 Add a new manga
+					 {% elseif current_path == 'app_cd_list'%}
+					 Add a new CD
+					 {% elseif current_path == 'app_lp_list'%}
+					 Add a new LP
+
+				 {% endif %}
+			</button>
+		</div>
+		
+	</div>
+</div>
