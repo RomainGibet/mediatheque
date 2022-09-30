@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<section class="container">
+		<div class="row">
+			<div class="col-3 my-3">
+
+				{% if form is defined and form %}
+					{{ form_start(form, {'action': path('app_add_book'), 'method': 'POST'}) }}
+
+
+					{{ form_row(form.author) }}
+					{{ form_row(form.title) }}
+					{{ form_row(form.isbn) }}
+					{{ form_row(form.editor) }}
+					{{ form_row(form.year) }}
+					{{ form_row(form.country) }}
+					{{ form_row(form.genre) }}
+					{{ form_row(form.imageFile) }}
+
+
+					<button type="submit" class="btn my-2" style="background-color:#bdcf3b">Ok</button>
+					{{ form_end(form) }}
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

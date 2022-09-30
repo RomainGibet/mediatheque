@@ -59,6 +59,11 @@ class Manga
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $CoverPicture;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -176,6 +181,18 @@ class Manga
         if ($this->users->removeElement($user)) {
             $user->removeManga($this);
         }
+
+        return $this;
+    }
+
+    public function getCoverPicture(): ?string
+    {
+        return $this->CoverPicture;
+    }
+
+    public function setCoverPicture(?string $CoverPicture): self
+    {
+        $this->CoverPicture = $CoverPicture;
 
         return $this;
     }

@@ -26,8 +26,14 @@
 	</div>
 	<div class="container-add">
 		<div class="add-button">
-			<button class="btn btn-secondary" style="background-color:var(--logo-and-font)" type="button" aria-expanded="false"><img id="add-picto" src="../public/images/ajouter.png">
-				{% set current_path = app.request.get('_route') %}
+			<button class="btn btn-secondary" style="background-color:var(--logo-and-font)"><a href=
+			{% set current_path = app.request.get('_route') %} 
+			{# {% if current_path == 'app_book_list' %}   #}
+			"{{ path('app_add_book')}}"
+			{# {% endif %} #}
+			
+			 style="background-color:var(--logo-and-font)" data-bs-toggle="addModal" data-bs-target="#addModal"  aria-expanded="false"><img id="add-picto" src="../public/images/ajouter.png">
+				
 
 				 	{% if current_path == 'app_book_list' %} 
 					 Add a new book 
@@ -43,7 +49,7 @@
 					 Add a new LP
 
 				 {% endif %}
-			</button>
+			</a></button>
 		</div>
 		
 	</div>

@@ -93,10 +93,10 @@ img {
 
 a {
     text-decoration: none;
-    color: #800;
+    /* color: #800; */
   }
   a:visited {
-    color: var(--logo-and-font);
+    /* color: var(--logo-and-font); */
   }
   a:hover, a:focus, a:active {
     text-decoration: none;

@@ -15,7 +15,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-
+            
+            # Vich\UploaderBundle:
+            #     is_bundle: false
+            #     type: annotation
+            #     dir: '%kernel.project_dir%/vendor/vich/uploader-bundle/src/Entity'
+            #     prefix: 'Vich\UploaderBundle\Entity'
+            #     alias: Vich\UploaderBundle
 when@test:
     doctrine:
         dbal:
