@@ -55,7 +55,7 @@ class Bd
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Bd")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="bd")
      */
     private $users;
 

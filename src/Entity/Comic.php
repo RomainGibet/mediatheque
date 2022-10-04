@@ -55,7 +55,7 @@ class Comic
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Comic")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="comic")
      */
     private $users;
 

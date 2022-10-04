@@ -142,6 +142,12 @@ a {
     margin-bottom: 2em;
 }
 
+.info {
+
+    margin-top: 0.5em;
+    margin-left: 0.3em;
+}
+
 .container-custom--item {
     width: 90%;
     margin:auto;
@@ -157,3 +163,15 @@ a {
     border-right: solid 1px var(--logo-and-font);
     margin-bottom: .7em;
 }
+
+.cover-cell {
+
+    width:100%;
+    margin:auto;
+}
+
+/* .custom-cell-book-cover {
+
+    width:25%;
+    height: auto;
+} */

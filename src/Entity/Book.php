@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,7 +66,7 @@ class Book
 
     /**
      * @Vich\UploadableField(mapping="book_cover_picture", fileNameProperty="imageName")
-     * 
+     * @Ignore()
      * @var File|null
      */
 
@@ -78,6 +79,11 @@ class Book
      */
 
     private ?string $imageName = null;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
 
 
     public function __construct()
@@ -227,6 +233,18 @@ class Book
         if ($this->users->removeElement($user)) {
             $user->removeBook($this);
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
