@@ -9,27 +9,32 @@
 	<section class="container-custom--cat">
 
 		<div class="row">
-			<div class="col-md-3 d-flex" style="background-color:#bdcf3b">
+		{% for book in bookList %}
+			<div class="col-md-3 d-flex">
 
 
-				<div class="col-md-6 cover" style="background-color:#ed82de">
-					<img src="../public/images/bookCover/haarypotter-a-l-ecole-des-sorciers-633c09be3fa16634992906.jpg">
+				<div class="col-md-6 cover">
+					<img src={{ vich_uploader_asset(book, 'imageFile') }}>
 				</div>
 
 
-				<div class="col-md-6 info" style="background-color:#cc2da2">
+				<div class="col-md-6 info">
 
-					<div class="info --author" style="background-color:#bdcf3b">author</div>
-					<div class="info --title" style="background-color:#bdcf3b">title</div>
-					<div class="info --country" style="background-color:#bdcf3b">country</div>
-					<div class="info --year" style="background-color:#bdcf3b">year</div>
-					<div class="info --genre" style="background-color:#bdcf3b">genre</div>
-					<div class="info --isbn" style="background-color:#bdcf3b">isbn</div>
+					<div class="info info_author" style="background-color:#bdcf3b">{{book.author}}</div>
+					<div class="info info_title" style="background-color:#bdcf3b">{{book.title}}</div>
+					
+					<div class="year_and_country d-flex">
+						<div class="info info_country" style="background-color:#bdcf3b">{{book.country}}  /</div>
+						<div class="info info_year" style="background-color:#bdcf3b">{{book.year}}</div>
+					</div>
+					<div class="info info_genre" style="background-color:#bdcf3b">{{book.genre}}</div>
+					<div class="info info_isbn" style="background-color:#bdcf3b">ISBN {{book.isbn}}</div>
 
 				</div>
 
 
 			</div>
+			{% endfor %}
 		</div>
 		{# 
 									

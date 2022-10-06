@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,14 @@ class BookRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+
+    public function fetchBooksUser(int $user_id)
+    {
+        $doctrine = $this->getEntityManager()->getConnection();
+
+        
     }
 
 //    /**

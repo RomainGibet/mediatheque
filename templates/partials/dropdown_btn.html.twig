@@ -5,7 +5,7 @@
 		</button>
 		<ul class="dropdown-menu">
 			<li>
-				<a class="dropdown-item" href="{{path('app_book_list')}}">Book</a>
+				<a class="dropdown-item" href="{{path('app_book_list', {user_id: app.user.id})}}">Book</a>
 			</li>
 			<li>
 				<a class="dropdown-item" href="{{path('app_comic_list')}}">Comic</a>
@@ -29,10 +29,10 @@
 			<button class="btn btn-secondary" style="background-color:var(--logo-and-font)"><a href=
 			{% set current_path = app.request.get('_route') %} 
 			{# {% if current_path == 'app_book_list' %}   #}
-			"{{ path('app_add_book')}}"
+			"{{ path('app_add_book', {user_id: app.user.id})}}"
 			{# {% endif %} #}
 			
-			 style="background-color:var(--logo-and-font)" data-bs-toggle="addModal" data-bs-target="#addModal"  aria-expanded="false"><img id="add-picto" src="../public/images/ajouter.png">
+			 style="background-color:var(--logo-and-font)" data-bs-toggle="addModal" data-bs-target="#addModal"  aria-expanded="false"><img id="add-picto" src= {{ asset ("../public/images/ajouter.png") }}>
 				
 
 				 	{% if current_path == 'app_book_list' %} 
