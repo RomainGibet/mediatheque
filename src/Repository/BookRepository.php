@@ -46,9 +46,12 @@ class BookRepository extends ServiceEntityRepository
     {
 
         return $this->createQueryBuilder('b')
-            ->innerJoin('App\Entity\User', 'u')
-            // ->innerJoin('user_book', 'ub', 'WITH', 'ub_id=u.id')
-            ->andWhere('u.id = :user_id')
+            ->innerJoin('b.users', 'u')
+            
+            // Pour joindre les deux tables je passe par la propriété "users" de App/Entity/Book car 
+            //le QueryBuilder ne peut pas faire appel à la table intermédiaire user_book.
+            
+            ->Where(':user_id = u.id')
             ->setParameter(':user_id', $user_id)
             ->orderBy('b.author', 'ASC')
             ->getQuery()
