@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,14 +61,18 @@ class Book
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="book")
+     * 
      */
     private $users;
 
 
     /**
+     * 
      * @Vich\UploadableField(mapping="book_cover_picture", fileNameProperty="imageName")
-     * @Ignore()
+     * @Ignore
+     * 
      * @var File|null
+     * 
      */
 
     private ?File $imageFile = null;

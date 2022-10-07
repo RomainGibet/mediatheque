@@ -7,6 +7,8 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,28 +17,35 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * 
+     * 
      */
     private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * 
+     * 
      */
     private $password;
 
@@ -468,6 +477,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->lp->removeElement($lp);
 
         return $this;
+    }
+
+
+    // ESSENTIEL POUR UPLOAD UNE IMAGE - SINON BLOCAGE CAR IMPOSSIBLE DE SERIALIZER UN FILE 
+    
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 
 
