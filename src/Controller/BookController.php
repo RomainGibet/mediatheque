@@ -8,11 +8,12 @@ use App\Form\AddBookType;
 use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-n;
+
 
 
 class BookController extends AbstractController
@@ -22,26 +23,36 @@ class BookController extends AbstractController
     /**
      * @Route("book_list/{user_id}/", name="app_book_list", methods={"GET"})
      * 
-     * 
      * @IsGranted("ROLE_USER", message="No access! Get out!")
      * 
      * 
      * @return Response
      */
 
-    public function show(BookRepository $bookRepository, ManagerRegistry $doctrine, int $user_id): Response
+    public function show(BookRepository $bookRepository, int $user_id): Response
 
     {
 
+        $current_user = $this->getUser();
+        $current_user_id = $current_user->getId();
+        if ($current_user_id === $user_id)  
+        {
 
-        // $bookList = $bookRepository->findAll();
-        $bookList = $bookRepository->fetchBooksUser($user_id);
+            $bookList = $bookRepository->fetchBooksUser($user_id);
 
-
-        return $this->render('collection/book_list.html.twig', [
+            return $this->render('collection/book_list.html.twig', [
             'bookList' => $bookList,
             'user_id' => $user_id
         ]);
+        }
+
+        return $this->render('404.html.twig');
+
+        // $bookList = $bookRepository->findAll();
+        
+
+
+        
     }
 
 
@@ -100,4 +111,31 @@ class BookController extends AbstractController
 
         ]);
     }
+
+
+    /**
+     * @Route("edit_book/{user_id}/{book_id}", name="app_edit_book", methods={"PUT","PATCH})
+     * 
+     * @IsGranted("ROLE_USER", message="No access! Get out!")
+     * 
+     * 
+     * @return Response
+     */
+
+    public function edit(
+
+        BookRepository $bookRepository,
+        Request $request,
+        ManagerRegistry $doctrine,
+        int $user_id,
+        int $book_id,
+    ): Response {
+
+
+
+
+
+
+}
+
 }

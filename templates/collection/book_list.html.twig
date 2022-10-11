@@ -15,21 +15,21 @@
 
 
 				<div class="col-md-6 cover">
-					<img src={{ vich_uploader_asset(book, 'imageFile') }}>
+					<img src={{ asset(vich_uploader_asset(book, 'imageFile')) }}>
 				</div>
 
 
 				<div class="col-md-6 info">
 
-					<div class="info info_author" style="background-color:#bdcf3b">{{book.author}}</div>
-					<div class="info info_title" style="background-color:#bdcf3b">{{book.title}}</div>
+					<div class="info info_author">{{book.author}}</div>
+					<div class="info info_title">{{book.title}}</div>
 					
 					<div class="year_and_country d-flex">
-						<div class="info info_country" style="background-color:#bdcf3b">{{book.country}}  /</div>
-						<div class="info info_year" style="background-color:#bdcf3b">{{book.year}}</div>
+						<div class="info info_country">{{book.country}}  /</div>
+						<div class="info info_year">{{book.year}}</div>
 					</div>
-					<div class="info info_genre" style="background-color:#bdcf3b">{{book.genre}}</div>
-					<div class="info info_isbn" style="background-color:#bdcf3b">ISBN {{book.isbn}}</div>
+					<div class="info info_genre">{{book.genre}}</div>
+					<div class="info info_isbn">ISBN {{book.isbn}}</div>
 
 				</div>
 
