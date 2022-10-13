@@ -28,9 +28,21 @@
 		<div class="add-button">
 			<button class="btn btn-secondary" style="background-color:var(--logo-and-font)"><a href=
 			{% set current_path = app.request.get('_route') %} 
-			{# {% if current_path == 'app_book_list' %}   #}
+			
+			{% if current_path == 'app_book_list' %}  
 			"{{ path('app_add_book', {user_id: app.user.id})}}"
-			{# {% endif %} #}
+			{# {% elseif current_path == 'app_comic_list'%}
+			"{{ path('app_add_comic', {user_id: app.user.id})}}"
+			{% elseif current_path == 'app_bd_list'%}
+			"{{ path('app_add_bd', {user_id: app.user.id})}}"
+			{% elseif current_path == 'app_manga_list'%}
+			"{{ path('app_add_manga', {user_id: app.user.id})}}"
+			{% elseif current_path == 'app_cd_list'%}
+			"{{ path('app_add_cd', {user_id: app.user.id})}}"
+			{% elseif current_path == 'app_lp_list'%}
+			"{{ path('app_add_lp', {user_id: app.user.id})}}" #}
+				
+			{% endif %}
 			
 			 style="background-color:var(--logo-and-font)" data-bs-toggle="addModal" data-bs-target="#addModal"  aria-expanded="false"><img id="add-picto" src= {{ asset ("../public/images/ajouter.png") }}>
 				

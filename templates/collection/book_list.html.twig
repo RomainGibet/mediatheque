@@ -9,83 +9,110 @@
 	<section class="container-custom--cat">
 
 		<div class="row">
-		
-		{% for book in bookList %}
-			<div class="col-md-3 d-flex">
+
+			{% for book in bookList %}
+				<div class="col-md-3 d-flex">
 
 
-				<div class="col-md-6 cover">
-					<img src={{ asset(vich_uploader_asset(book, 'imageFile')) }}>
-				</div>
-
-
-				<div class="col-md-6 info">
-
-					<div class="info info_author">{{book.author}}</div>
-					<div class="info info_title">{{book.title}}</div>
-					
-					<div class="year_and_country d-flex">
-						<div class="info info_country">{{book.country}}  /</div>
-						<div class="info info_year">{{book.year}}</div>
+					<div class="col-md-6 cover">
+						<img src={{ asset(vich_uploader_asset(book, 'imageFile')) }}>
 					</div>
-					<div class="info info_genre">{{book.genre}}</div>
-					<div class="info info_isbn">ISBN {{book.isbn}}</div>
 
+
+					<div class="col-md-6 info">
+
+						<div class="info info_author">{{book.author}}</div>
+						<div class="info info_title">{{book.title}}</div>
+
+						<div class="year_and_country d-flex">
+							<div class="info info_country">{{book.country}}
+								/</div>
+							<div class="info info_year">{{book.year}}</div>
+						</div>
+						<div class="info info_genre">{{book.genre}}</div>
+						<div class="info info_isbn">ISBN
+							{{book.isbn}}
+						</div>
+
+
+						<div class="modif-bloc d-flex">
+
+							<div class="modif modif-edit">
+
+							<button class="modif-button">
+								<a href="{{ path('app_edit_book', {'user_id': app.user.id, 'book_id': book.id}) }}">
+									<img src={{ asset ("../public/images/editer.png") }}>
+								</a>
+								</button>
+							</div> 
+
+							 <div class="modif modif-delete">
+
+								<a href="{{ path('app_delete_book', {'user_id': app.user.id, 'book_id': book.id}) }}"></a>
+								
+								 {% include 'book/deleteBookForm.html.twig' %} 
+
+
+							</div>
+
+
+						</div>
+
+
+					</div>
 				</div>
-
-
-			</div>
 			{% endfor %}
+
 		</div>
 		{# 
-									
-									<div class="col-md-1 custom-cell">
-										Author
-									</div>
-									<div class="col-md-1 custom-cell">
-										Title
-									</div>
-									<div class="col-md-1 custom-cell">
-										ISBN
-									</div>
-									<div class="col-md-1 custom-cell">
-										Editor
-									</div>
-									<div class="col-md-1 custom-cell">
-										Year
-									</div>
-									<div class="col-md-1 custom-cell">
-										Country
-									</div>
-									<div class="col-md-1 custom-cell">
-										Genre
-									</div>
-						
-								</div> #}
+																											
+																											<div class="col-md-1 custom-cell">
+																												Author
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												Title
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												ISBN
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												Editor
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												Year
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												Country
+																											</div>
+																											<div class="col-md-1 custom-cell">
+																												Genre
+																											</div>
+																								
+																										</div> #}
 	</section>
 
 
 	{# <section class="container-custom--item">
-			
-					{% for book in bookList %}
-						<div class="row">
-							<div class="col-md-1 custom-cell">
-								<div class="cover-cell">
-			
-									<img src="{{ vich_uploader_asset(book, 'imageFile') }}">
-								</div>
-							</div>
-							<div class="col-md-1 custom-cell">{{book.author}}</div>
-							<div class="col-md-1 custom-cell">{{book.title}}</div>
-							<div class="col-md-1 custom-cell">{{book.isbn}}</div>
-							<div class="col-md-1 custom-cell">{{book.editor}}</div>
-							<div class="col-md-1 custom-cell">{{book.year}}</div>
-							<div class="col-md-1 custom-cell">{{book.country}}</div>
-							<div class="col-md-1 custom-cell">{{book.genre}}</div>
-			
-			
-						</div>
-					{% endfor %}
-				</section> #}
+													
+															{% for book in bookList %}
+																<div class="row">
+																	<div class="col-md-1 custom-cell">
+																		<div class="cover-cell">
+													
+																			<img src="{{ vich_uploader_asset(book, 'imageFile') }}">
+																		</div>
+																	</div>
+																	<div class="col-md-1 custom-cell">{{book.author}}</div>
+																	<div class="col-md-1 custom-cell">{{book.title}}</div>
+																	<div class="col-md-1 custom-cell">{{book.isbn}}</div>
+																	<div class="col-md-1 custom-cell">{{book.editor}}</div>
+																	<div class="col-md-1 custom-cell">{{book.year}}</div>
+																	<div class="col-md-1 custom-cell">{{book.country}}</div>
+																	<div class="col-md-1 custom-cell">{{book.genre}}</div>
+													
+													
+																</div>
+															{% endfor %}
+														</section> #}
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
     --main-bg-color: #f4ec5d;
     --logo-and-font: #9c1e01;
+    --icone-bg: #bdcf3b;
 
 }
 body {
@@ -96,12 +97,22 @@ a {
     /* color: #800; */
   }
   a:visited {
-    /* color: var(--logo-and-font); */
+    color: var(--logo-and-font);
   }
   a:hover, a:focus, a:active {
     text-decoration: none;
     color: white;
-    background: #800;
+    
+  }
+
+  .add-button a {
+
+    color: white;
+  }
+
+  .add-button a:hover {
+
+    font-weight:bolder;
   }
 
   /* ----------------------------------------P A R T I A L S-------------------------------------------------- */
@@ -210,3 +221,44 @@ font-size:.8em;
     width:25%;
     height: auto;
 } */
+
+
+ .modif-bloc {
+
+    width:1.7em;
+   
+ 
+
+}
+
+.modif {
+
+    margin-top: .5em;
+}
+
+
+.modif-button {
+
+    background-color: transparent;
+    border: none;
+    width: 2em;
+    
+}
+
+.modif-button:hover {
+
+    transform: scale(1.5);
+    transition: 0.4s;
+    background-color: none;
+    
+    
+    
+}
+
+a {
+
+    background-color: none;
+}
+
+
+

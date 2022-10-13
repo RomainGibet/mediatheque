@@ -60,6 +60,8 @@ class AddBookType extends AbstractType
             ->add('imageFile', VichImageType::class, [
 
                 'label'=> 'Cover Picture',
+                'allow_delete' => false,
+                'download_label' => false,
             ])
         ;
     }
