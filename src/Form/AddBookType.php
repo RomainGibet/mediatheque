@@ -69,7 +69,7 @@ class AddBookType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Book::class,
+            'data_class' => Book::class, Bd::class
             
         ]);
     }

@@ -11,7 +11,7 @@
 				<a class="dropdown-item" href="{{path('app_comic_list')}}">Comic</a>
 			</li>
 			<li>
-				<a class="dropdown-item" href="{{path('app_bd_list')}}">BD</a>
+				<a class="dropdown-item" href="{{path('app_bd_list', {user_id: app.user.id})}}">BD</a>
 			</li>
 			<li>
 				<a class="dropdown-item" href="{{path('app_manga_list')}}">Manga</a>
@@ -31,10 +31,12 @@
 			
 			{% if current_path == 'app_book_list' %}  
 			"{{ path('app_add_book', {user_id: app.user.id})}}"
-			{# {% elseif current_path == 'app_comic_list'%}
-			"{{ path('app_add_comic', {user_id: app.user.id})}}"
 			{% elseif current_path == 'app_bd_list'%}
 			"{{ path('app_add_bd', {user_id: app.user.id})}}"
+			
+			{# {% elseif current_path == 'app_comic_list'%}
+			"{{ path('app_add_comic', {user_id: app.user.id})}}"
+			
 			{% elseif current_path == 'app_manga_list'%}
 			"{{ path('app_add_manga', {user_id: app.user.id})}}"
 			{% elseif current_path == 'app_cd_list'%}

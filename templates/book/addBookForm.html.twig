@@ -7,8 +7,15 @@
 		<div class="row">
 			<div class="col-3 my-3">
 
+			{% set current_path = app.request.get('_route') %}
+
+			{% if current_path == 'app_book_list' %}
 				{% if form is defined and form %}
 					{{ form_start(form, {'action': path('app_add_book', {'user_id': app.user.id}), 'method': 'POST'}) }}
+			
+			{% elseif current_path == 'app_bd_list'%}
+			{% if form is defined and form %}
+					{{ form_start(form, {'action': path('app_add_bd', {'user_id': app.user.id}), 'method': 'POST'}) }}
 
 
 					{{ form_row(form.author) }}

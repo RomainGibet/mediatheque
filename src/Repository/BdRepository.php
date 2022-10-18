@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bd;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,6 +39,24 @@ class BdRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
+    public function fetchBdUser(int $user_id)
+    {
+
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.users', 'u')
+            
+            // Pour joindre les deux tables je passe par la propriété "users" de App/Entity/Bd car 
+            //le QueryBuilder ne peut pas faire appel à la table intermédiaire user_bd.
+            
+            ->Where(':user_id = u.id')
+            ->setParameter(':user_id', $user_id)
+            ->orderBy('b.author', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 //    /**
 //     * @return Bd[] Returns an array of Bd objects
