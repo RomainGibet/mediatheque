@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Entity\User;
 use App\Form\AddBookType;
 use App\Repository\BookRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -57,8 +58,7 @@ class BookController extends AbstractController
         
     }
 
-
-
+    
 
 
     /**
@@ -72,7 +72,9 @@ class BookController extends AbstractController
 
     public function add(
 
+        // User $user,
         BookRepository $bookRepository,
+        UserRepository $userRepository,
         Request $request,
         ManagerRegistry $doctrine,
         int $user_id
@@ -90,6 +92,7 @@ class BookController extends AbstractController
             
             $bookRepository->add($book, true);
             $this->addFlash('success', 'Livre rajouté');
+            $userRepository->bookCountsAdd($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($book);
@@ -195,11 +198,13 @@ class BookController extends AbstractController
         Request $request, 
         Book $book, 
         User $user,
+        UserRepository $userRepository,
         BookRepository $bookRepository
         ): Response
     {
         if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {
             $bookRepository->remove($book, true);
+            $userRepository->bookCountsDelete($this->getUser());
         }
 
         return $this->redirectToRoute('app_book_list', [

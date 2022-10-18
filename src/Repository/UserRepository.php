@@ -56,6 +56,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
+
+    public function bookCountsAdd(User $user) 
+    
+    {
+
+        $user->setBookCount($user->getBookCount() +1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+    public function bookCountsDelete(User $user) 
+    
+    {
+
+        $user->setBookCount($user->getBookCount() -1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+
+
+
+
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

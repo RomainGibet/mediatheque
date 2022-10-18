@@ -9,7 +9,10 @@ body {
 
     background-color:var(--main-bg-color);
     font-size: 1.4em;
+    height:100vh;
     font-family:'Source Sans Pro', sans-serif;
+    display:flex;
+   flex-direction: column;
 }
 
 .custom-font {
@@ -33,6 +36,31 @@ body {
     height:20vh;
     margin: auto;
     
+}
+
+/* -----------------------------------------F O O T E R-------------------------------------------------- */
+/* -----------------------------------------F O O T E R-------------------------------------------------- */
+.footer-bloc {
+
+    
+    width: 50%;
+    border-top: #800 solid 2px;
+    margin: auto;
+    margin-bottom:1em;
+    
+    
+    
+    
+}
+
+.nav-footer {
+
+   
+    width: 30%;
+    margin:auto;
+    margin-top:1em;
+    font-size: medium;
+    color: var(--logo-and-font);
 }
 
 /* -----------------------------------------N A V-------------------------------------------------- */
@@ -95,34 +123,34 @@ img {
 a {
     text-decoration: none;
     /* color: #800; */
-  }
-  a:visited {
+}
+a:visited {
     color: var(--logo-and-font);
-  }
-  a:hover, a:focus, a:active {
+}
+a:hover, a:focus, a:active {
     text-decoration: none;
     color: white;
     
-  }
+}
 
-  .add-button a {
+.add-button a {
 
     color: white;
-  }
+}
 
-  .add-button a:hover {
+.add-button a:hover {
 
     font-weight:bolder;
-  }
+}
 
-  /* ----------------------------------------P A R T I A L S-------------------------------------------------- */
+/* ----------------------------------------P A R T I A L S-------------------------------------------------- */
 /* ------------------------------------------P A R T I A L S-------------------------------------------------- */
 
 
 .buttons {
 
-   display:flex; 
-     justify-content: flex-start; 
+    display:flex; 
+    justify-content: flex-start; 
     width:90%;
     margin: auto;
     margin-top: 1%;
@@ -134,8 +162,8 @@ a {
 
     width: 1.3em;
     margin-right:.3em;
-   display:inline-block;
-   vertical-align: middle;
+    display:inline-block;
+    vertical-align: middle;
 
     
     /* height: 1em; */
@@ -151,6 +179,7 @@ a {
     width: 90%;
     margin:auto;
     margin-bottom: 2em;
+    flex-grow: 1;
 }
 
 .info {
@@ -188,8 +217,8 @@ a {
 
 .year_and_country {
 
-margin-top: 1.5em;
-font-size:.8em;
+    margin-top: 1.5em;
+    font-size:.8em;
 }
 
 
@@ -223,7 +252,7 @@ font-size:.8em;
 } */
 
 
- .modif-bloc {
+.modif-bloc {
 
     width:1.7em;
    

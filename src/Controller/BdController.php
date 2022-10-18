@@ -9,16 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BdController extends AbstractController
 {
-    /**
-     * @Route("/bd", name="app_bd")
-     */
-    public function index(): Response
-    {
-        return $this->render('bd/index.html.twig', [
-            'controller_name' => 'BdController',
-        ]);
-    }
-
+    
     /**
      * @Route("/bd_list", name="app_bd_list", methods={"GET"})
      * 
