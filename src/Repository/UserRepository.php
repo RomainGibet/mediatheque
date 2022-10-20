@@ -80,6 +80,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
 
 
+    public function bdCountsAdd(User $user) 
+    
+    {
+
+        $user->setBdCount($user->getBdCount() +1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+    public function bdCountsDelete(User $user) 
+    
+    {
+
+        $user->setBdCount($user->getBdCount() -1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+
+
+
+
+
 
 
 //    /**

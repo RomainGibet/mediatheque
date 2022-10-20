@@ -1,0 +1,10 @@
+<form class="d-inline" method="post" action="{{ path('app_delete_bd', {'user_id': app.user.id, 'bd_id': bd.id}) }}" onsubmit="return confirm('Are you sure you want to delete this BD');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bd.id) }}">
+	<button class="modif-button">
+
+
+		
+			<img src={{ asset ("../public/images/bin.png") }}>
+
+		</button>
+	</form>

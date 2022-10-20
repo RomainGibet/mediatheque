@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Repository\BdRepository;
 use App\Entity\Bd;
-use App\Repository\UserRepository;
-use App\Form\AddBookType;
+use App\Entity\User;
+use App\Form\AddBdType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,7 @@ class BdController extends AbstractController
 
 
         $bd = new Bd;
-        $form = $this->createForm(AddBookType::class, $bd);
+        $form = $this->createForm(AddBdType::class, $bd);
         $form->handleRequest($request);
 
 
@@ -84,7 +85,7 @@ class BdController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute(
-                'app_book_list',
+                'app_bd_list',
                 [
                     'user_id' => $user_id
                 ],
@@ -92,12 +93,109 @@ class BdController extends AbstractController
             );
         }
 
-        return $this->renderForm('/book/addBookForm.html.twig', [
+        return $this->renderForm('/bd/addBdForm.html.twig', [
 
-            'book' => $bd,
+            'bd' => $bd,
             'form' => $form,
             'user_id' => $user_id
 
         ]);
     }
+
+     /**
+     * @Route("edit_bd/{user_id}/{bd_id}", name="app_edit_bd", methods={"GET","POST","PUT"},
+     * requirements={"bd_id"="\d+"})
+     * 
+     * @ParamConverter("bd", options={"id" = "bd_id"})
+     * @ParamConverter("user", options={"id" = "user_id"})
+     * 
+     * @IsGranted("ROLE_USER", message="No access! Get out!")
+     * 
+     * 
+     * @return Response
+     */
+
+    public function edit(
+ 
+        Bd $bd,
+        User $user,
+        BdRepository $bdRepository,
+        Request $request,
+        ManagerRegistry $doctrine,
+        int $user_id
+        
+    ): Response {
+        // dd($request);
+
+
+        $form = $this->createForm(AddBdType::class, $bd);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->IsValid()) {
+
+    
+            $bdRepository->add($bd, true);
+           
+
+            $em = $doctrine->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute(
+                'app_bd_list',
+                [
+                    'user_id' => $user->getId(),
+                    
+                ],
+                Response::HTTP_SEE_OTHER
+            );
+
+        }
+
+        return $this->renderForm('/bd/editBdForm.html.twig', [
+
+            'bd_id' => $bd->getId(),
+            'form' => $form,
+            // 'user' => $user,
+            'user_id' => $user_id
+
+        ]);
+
+    }
+
+
+
+    /**
+     * @Route("delete_bd/{user_id}/{bd_id}", name="app_delete_bd", methods={"GET","POST","DELETE"})
+     * 
+     * @ParamConverter("bd", options={"id" = "bd_id"})
+     * @ParamConverter("user", options={"id" = "user_id"})
+     * 
+     * @IsGranted("ROLE_USER", message="No access! Get out!")
+     * 
+     * 
+     * @return Response
+     */
+
+    public function delete(
+
+        Request $request, 
+        Bd $bd, 
+        User $user,
+        UserRepository $userRepository,
+        BdRepository $bdRepository
+        ): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$bd->getId(), $request->request->get('_token'))) {
+            $bdRepository->remove($bd, true);
+            $userRepository->bdCountsDelete($this->getUser());
+        }
+
+        return $this->redirectToRoute('app_bd_list', [
+
+            "user_id" => $user->getId(),
+        
+        ], Response::HTTP_SEE_OTHER);
+    }
+
 }

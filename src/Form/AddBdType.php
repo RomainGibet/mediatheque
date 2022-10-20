@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Book;
+use App\Entity\Bd;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class AddBookType extends AbstractType
+class AddBdType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -72,7 +72,7 @@ class AddBookType extends AbstractType
         $resolver->setDefaults(
 
             [
-                'data_class' => Book::class,
+                'data_class' => Bd::class,
             ]
 
         );

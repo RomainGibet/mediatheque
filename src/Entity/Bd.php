@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=BdRepository::class)
+ * @Vich\Uploadable
  */
 class Bd
 {
@@ -77,7 +78,7 @@ class Bd
      * @var string|null
      */
 
-    private ?string $imageName = null;
+    private ?string $bdCover = null;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
@@ -199,14 +200,14 @@ class Bd
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
+    public function setbdCover(?string $bdCover): void
     {
-        $this->imageName = $imageName;
+        $this->bdCover = $bdCover;
     }
 
-    public function getImageName(): ?string
+    public function getbdCover(): ?string
     {
-        return $this->imageName;
+        return $this->bdCover;
     }
 
     /**

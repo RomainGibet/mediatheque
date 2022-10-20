@@ -8,7 +8,7 @@
 			<div class="col-3 my-3">
 
 				{% if form is defined and form %}
-					{{ form_start(form, {'action': path('app_edit_book', {'user_id': app.user.id, 'book_id': app.request.get('book_id')}), 'method': 'POST'}) }}
+					{{ form_start(form, {'action': path('app_edit_bd', {'user_id': app.user.id, 'bd_id': app.request.get('bd_id')}), 'method': 'POST'}) }}
 					{# {{ dump(app.request.get())}} #}
 
 

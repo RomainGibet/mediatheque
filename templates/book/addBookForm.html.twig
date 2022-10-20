@@ -7,30 +7,28 @@
 		<div class="row">
 			<div class="col-3 my-3">
 
-			{% set current_path = app.request.get('_route') %}
+				{% set current_path = app.request.get('_route') %}
 
-			{% if current_path == 'app_book_list' %}
-				{% if form is defined and form %}
-					{{ form_start(form, {'action': path('app_add_book', {'user_id': app.user.id}), 'method': 'POST'}) }}
-			
-			{% elseif current_path == 'app_bd_list'%}
-			{% if form is defined and form %}
-					{{ form_start(form, {'action': path('app_add_bd', {'user_id': app.user.id}), 'method': 'POST'}) }}
+				{# {% if current_path == 'app_book_list' %} #}
+					{% if form is defined and form %}
+						{{ form_start(form, {'action': path('app_add_book', {'user_id': app.user.id}), 'method': 'POST'}) }}
 
 
-					{{ form_row(form.author) }}
-					{{ form_row(form.title) }}
-					{{ form_row(form.isbn) }}
-					{{ form_row(form.editor) }}
-					{{ form_row(form.year) }}
-					{{ form_row(form.country) }}
-					{{ form_row(form.genre) }}
-					{{ form_row(form.imageFile) }}
+						{{ form_row(form.author) }}
+						{{ form_row(form.title) }}
+						{{ form_row(form.isbn) }}
+						{{ form_row(form.editor) }}
+						{{ form_row(form.year) }}
+						{{ form_row(form.country) }}
+						{{ form_row(form.genre) }}
+						{{ form_row(form.imageFile) }}
 
 
-					<button type="submit" class="btn my-2" style="background-color:#bdcf3b">Ok</button>
-					{{ form_end(form) }}
-				{% endif %}
+						<button type="submit" class="btn my-2" style="background-color:#bdcf3b">Ok</button>
+						{{ form_end(form) }}
+
+					{% endif %}
+				{# {% endif %} #}
 			</div>
 		</div>
 	</section>
