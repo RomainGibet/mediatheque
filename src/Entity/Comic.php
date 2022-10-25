@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\ComicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ComicRepository::class)
+ * @Vich\Uploadable
  */
 class Comic
 {
@@ -59,10 +62,30 @@ class Comic
      */
     private $users;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     /**
+     * 
+     * @Vich\UploadableField(mapping="comic_cover_picture", fileNameProperty="comicCover")
+     * 
+     * @var File|null
+     * 
      */
-    private $CoverPicture;
+
+    private ?File $imageFile = null;
+
+    /**
+     * @ORM\Column(type="string")
+     * 
+     * @var string|null
+     */
+
+    private ?string $comicCover = null;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
+
+    
 
     public function __construct()
     {
@@ -122,7 +145,7 @@ class Comic
         return $this;
     }
 
-    public function get(): ?string
+    public function getYear(): ?string
     {
         return $this->year;
     }
@@ -158,6 +181,36 @@ class Comic
         return $this;
     }
 
+     /** 
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setcomicCover(?string $comicCover): void
+    {
+        $this->comicCover = $comicCover;
+    }
+
+    public function getcomicCover(): ?string
+    {
+        return $this->comicCover;
+    }
+
     /**
      * @return Collection<int, User>
      */
@@ -185,14 +238,14 @@ class Comic
         return $this;
     }
 
-    public function getCoverPicture(): ?string
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->CoverPicture;
+        return $this->updatedAt;
     }
 
-    public function setCoverPicture(?string $CoverPicture): self
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
-        $this->CoverPicture = $CoverPicture;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

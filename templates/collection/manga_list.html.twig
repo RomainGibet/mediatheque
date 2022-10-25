@@ -6,5 +6,69 @@
 
 	{% include "partials/dropdown_btn.html.twig" %}
 
+	<section class="container-custom--cat">
+
+		<div class="row">
+
+			{% for manga in mangaList %}
+				<div class="col-md-3 d-flex">
+
+
+					<div class="col-md-6 cover">
+						<img src={{ asset(vich_uploader_asset(manga, 'imageFile')) }}>
+					</div>
+
+
+					<div class="col-md-6 info">
+
+						<div class="info info_author">{{manga.author}}</div>
+						<div class="info info_title">{{manga.title}}</div>
+
+						<div class="year_and_country d-flex">
+							<div class="info info_country">{{manga.country}}
+								/</div>
+							<div class="info info_year">{{manga.year}}</div>
+						</div>
+						<div class="info info_genre">{{manga.genre}}</div>
+						<div class="info info_isbn">ISBN
+							{{manga.isbn}}
+						</div>
+
+
+						<div class="modif-bloc d-flex">
+
+							<div class="modif modif-edit">
+
+								<button class="modif-button">
+									<a href="{{ path('app_edit_manga', {'user_id': app.user.id, 'manga_id': manga.id}) }}">
+										<img src={{ asset ("../public/images/editer.png") }}>
+									</a>
+								</button>
+							</div>
+
+							<div class="modif modif-delete">
+
+								<a href="{{ path('app_delete_manga', {'user_id': app.user.id, 'manga_id': manga.id}) }}"></a>
+
+								{% include 'manga/deleteMangaForm.html.twig' %}
+
+
+							</div>
+
+
+						</div>
+
+
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+
+	</section>
+
+
+	{% include "partials/footer.html.twig" %}
+
 
 {% endblock %}

@@ -102,7 +102,45 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
 
 
+    public function comicCountsAdd(User $user) 
+    
+    {
 
+        $user->setComicsCount($user->getComicsCount() +1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+    public function comicCountsDelete(User $user) 
+    
+    {
+
+        $user->setComicsCount($user->getComicsCount() -1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+    public function mangaCountsAdd(User $user) 
+    
+    {
+
+        $user->setMangaCount($user->getMangaCount() +1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
+
+    public function mangaCountsDelete(User $user) 
+    
+    {
+
+        $user->setMangaCount($user->getMangaCount() -1);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+    }
 
 
 

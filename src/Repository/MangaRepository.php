@@ -39,6 +39,22 @@ class MangaRepository extends ServiceEntityRepository
         }
     }
 
+    public function fetchMangaUser(int $user_id)
+    {
+
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.users', 'u')
+            
+            // Pour joindre les deux tables je passe par la propriété "users" de App/Entity/Manga car 
+            //le QueryBuilder ne peut pas faire appel à la table intermédiaire user_manga.
+            
+            ->Where(':user_id = u.id')
+            ->setParameter(':user_id', $user_id)
+            ->orderBy('m.author', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Manga[] Returns an array of Manga objects
 //     */

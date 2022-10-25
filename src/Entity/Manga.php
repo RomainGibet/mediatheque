@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\MangaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MangaRepository::class)
+ * @Vich\Uploadable
  */
 class Manga
 {
@@ -60,9 +63,29 @@ class Manga
     private $users;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Vich\UploadableField(mapping="manga_cover_picture", fileNameProperty="mangaCover")
+     * 
+     * @var File|null
+     * 
      */
-    private $CoverPicture;
+
+    private ?File $imageFile = null;
+
+    /**
+     * @ORM\Column(type="string")
+     * 
+     * @var string|null
+     */
+
+    private ?string $mangaCover = null;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
+
+    
 
     public function __construct()
     {
@@ -98,7 +121,7 @@ class Manga
         return $this;
     }
 
-    public function gstring(): ?string
+    public function getIsbn(): ?string
     {
         return $this->isbn;
     }
@@ -158,6 +181,36 @@ class Manga
         return $this;
     }
 
+    /** 
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setmangaCover(?string $mangaCover): void
+    {
+        $this->mangaCover = $mangaCover;
+    }
+
+    public function getmangaCover(): ?string
+    {
+        return $this->mangaCover;
+    }
+
     /**
      * @return Collection<int, User>
      */
@@ -185,15 +238,17 @@ class Manga
         return $this;
     }
 
-    public function getCoverPicture(): ?string
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->CoverPicture;
+        return $this->updatedAt;
     }
 
-    public function setCoverPicture(?string $CoverPicture): self
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
-        $this->CoverPicture = $CoverPicture;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
+
+    
 }

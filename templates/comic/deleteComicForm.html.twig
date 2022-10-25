@@ -1,0 +1,10 @@
+<form class="d-inline" method="post" action="{{ path('app_delete_comic', {'user_id': app.user.id, 'comic_id': comic.id}) }}" onsubmit="return confirm('Are you sure you want to delete this comic?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comic.id) }}">
+	<button class="modif-button">
+
+
+		
+			<img src={{ asset ("../public/images/bin.png") }}>
+
+		</button>
+	</form>

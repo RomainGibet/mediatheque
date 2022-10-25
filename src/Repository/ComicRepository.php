@@ -39,6 +39,22 @@ class ComicRepository extends ServiceEntityRepository
         }
     }
 
+    public function fetchComicUser(int $user_id)
+    {
+
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.users', 'u')
+            
+            // Pour joindre les deux tables je passe par la propriété "users" de App/Entity/Comic car 
+            //le QueryBuilder ne peut pas faire appel à la table intermédiaire user_bd.
+            
+            ->Where(':user_id = u.id')
+            ->setParameter(':user_id', $user_id)
+            ->orderBy('c.author', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Comic[] Returns an array of Comic objects
 //     */
