@@ -68,7 +68,7 @@ class Book
 
     /**
      * 
-     * @Vich\UploadableField(mapping="book_cover_picture", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="book_cover_picture", fileNameProperty="bookCover")
      * @Ignore
      * 
      * @var File|null
@@ -83,7 +83,7 @@ class Book
      * @var string|null
      */
 
-    private ?string $imageName = null;
+    private ?string $bookCover= null;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
@@ -205,14 +205,14 @@ class Book
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
+    public function setbookCover(?string $bookCover): void
     {
-        $this->imageName = $imageName;
+        $this->bookCovere = $bookCover;
     }
 
-    public function getImageName(): ?string
+    public function getbookCover(): ?string
     {
-        return $this->imageName;
+        return $this->bookCover;
     }
 
     /**
